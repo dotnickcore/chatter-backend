@@ -34,4 +34,17 @@ export class AuthService {
     // Return the token in the response body as well (for the frontend to access)
     return { token };
   }
+
+  logout(response: Response) {
+    response.cookie('Authentication', '', {
+      httpOnly: true,
+      expires: new Date(0),  // Expire in the past
+      maxAge: 0,             // Ensures instant removal
+      path: '/',             // Matches original path
+      secure: process.env.NODE_ENV === 'production', // Secure in production
+      sameSite: 'lax',       // Ensure consistency
+    });
+
+    response.status(200).json({ message: "Logged out successfully" });
+}
 }
