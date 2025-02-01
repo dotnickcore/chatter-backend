@@ -12,6 +12,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: 'http://localhost:5173', // Allow Vite frontend
+    credentials: true, // This allows cookies to be sent
   });
 
   app.use(cookieParser());
